@@ -1,5 +1,5 @@
 *********************************************************  
-# Common steps for both "domain in image" and "model in image"  
+## Common steps for both "domain in image" and "model in image"  
 *********************************************************  
 
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home  
@@ -118,7 +118,7 @@ kubectl -it exec pod/sample-domain1-admin-server -c weblogic-server -n sample-do
 t3 for wlst - 30012
 
 *********************************************************  
-Model in image
+## Model in image
 *********************************************************  
 
 cd $WEBLOGIC_POC_HOME/model-in-image-blog 
@@ -196,7 +196,8 @@ cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.yaml $WEBLOGIC_POC_HOME/mo
 cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.properties $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/
 
 # Edit BlogDomain-WDT.yaml and add below section, and take out jdbc section as that will be merged via config map  
-`kubernetes:
+```
+kubernetes:
     apiVersion: weblogic.oracle/v8
     kind: Domain
     metadata:
@@ -215,7 +216,7 @@ cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.properties $WEBLOGIC_POC_H
                     value: "-Dweblogic.StdoutDebugEnabled=false"
                 CUSTOM_DOMAIN_NAME
                     value: 'sample-domain3'
-`
+```
 
 # Use extract utility to create a skeleton domain resource yaml  
 ./weblogic-deploy/bin/extractDomainResource.sh -oracle_home /Users/rbajaj/Oracle/Middleware/Oracle_Home \
@@ -226,7 +227,7 @@ cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.properties $WEBLOGIC_POC_H
   -domain_resource_file ./domain-resources/WLS/blog-domain.yaml  
 
 # And this under spec and pod section respectively
-`    domainHomeSourceType: FromModel
+```   domainHomeSourceType: FromModel
     includeServerOutInPodLog: true
     serverStartPolicy: "IF_NEEDED"
     # NodePort to expose for the admin server
@@ -269,7 +270,7 @@ cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.properties $WEBLOGIC_POC_H
             requests:
                 cpu: "250m"
                 memory: "768Mi"
-`
+```
 
 # Create weblogic domain  
 kubectl apply -f $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/WLS/blog-domain.yaml  
