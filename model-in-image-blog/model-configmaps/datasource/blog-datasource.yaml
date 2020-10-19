@@ -1,0 +1,17 @@
+resources:
+    JDBCSystemResource:
+        jdbc/blog:
+            Target: 'Managed-Server-0'
+            JdbcResource:
+                DatasourceType: GENERIC
+                JDBCConnectionPoolParams:
+                    TestTableName: SQL SELECT 1
+                JDBCDataSourceParams:
+                    JNDIName: jdbc.blog
+                JDBCDriverParams:
+                    URL: 'jdbc:mysql://blog-db-mysql/blogdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC'
+                    PasswordEncrypted: '@@SECRET:blogdb-credentials:password@@'
+                    DriverName: com.mysql.jdbc.Driver
+                    Properties:
+                        user:
+                            Value: bloguser

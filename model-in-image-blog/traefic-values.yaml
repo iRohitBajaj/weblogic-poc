@@ -1,0 +1,11 @@
+wlsDomain:
+  domainUID: sample-domain3
+  clusterName: cluster1  
+  managedServerPort: 8001
+
+# Voyager specific values
+voyager:
+  # web port
+  webPort: 30305
+  # stats port
+  statsPort: 30315

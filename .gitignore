@@ -1,0 +1,6 @@
+docker-secret.yaml
+model-in-image-blog/docker-secret*.yaml
+domain-home-in-image-blog/docker-secret*.yaml
+model-in-image-blog/outputs/*
+domain-home-in-image-blog/outputs/*
+domain-home-in-image-blog/archive.zip

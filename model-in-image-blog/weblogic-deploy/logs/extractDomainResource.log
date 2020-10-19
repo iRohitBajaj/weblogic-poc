@@ -1,0 +1,229 @@
+####<Oct 18, 2020 9:51:36 PM> <INFO> <WebLogicDeployToolingVersion> <logVersionInfo> <WLSDPLY-01750> <The WebLogic Deploy Tooling extractDomainResource version is 1.9.5:master.17757ef:Aug 27, 2020 22:22 UTC>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/python/extract_resource.py>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[0] = /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/python/extract_resource.py>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[1] = -oracle_home>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[2] = /Users/rbajaj/Oracle/Middleware/Oracle_Home>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[3] = -domain_home>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[4] = /u01/domains/sample-domain3>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[5] = -model_file>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[6] = /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[7] = -variable_file>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[8] = /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.properties>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[9] = -archive_file>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[10] = /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[11] = -domain_resource_file>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <extract_resource> <main> <> <sys.argv[12] = ./domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <CommandLineArgUtil> <process_args> <> <ENTRY ['/Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/python/extract_resource.py', '-oracle_home', '/Users/rbajaj/Oracle/Middleware/Oracle_Home', '-domain_home', '/u01/domains/sample-domain3', '-model_file', '/Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml', '-variable_file', '/Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.properties', '-archive_file', '/Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip', '-domain_resource_file', './domain-resources/WLS/blog-domain.yaml']>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <CommandLineArgUtil> <process_args> <WLSDPLY-01600> <Processing command-line argument -oracle_home>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingDirectory> <> <ENTRY /Users/rbajaj/Oracle/Middleware/Oracle_Home>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateDirectoryName> <> <ENTRY /Users/rbajaj/Oracle/Middleware/Oracle_Home>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateDirectoryName> <> <RETURN /Users/rbajaj/Oracle/Middleware/Oracle_Home>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingDirectory> <> <RETURN /Users/rbajaj/Oracle/Middleware/Oracle_Home>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingDirectory> <> <ENTRY /Users/rbajaj/Oracle/Middleware/Oracle_Home/wlserver>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateDirectoryName> <> <ENTRY /Users/rbajaj/Oracle/Middleware/Oracle_Home/wlserver>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateDirectoryName> <> <RETURN /Users/rbajaj/Oracle/Middleware/Oracle_Home/wlserver>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingDirectory> <> <RETURN /Users/rbajaj/Oracle/Middleware/Oracle_Home/wlserver>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <CommandLineArgUtil> <process_args> <WLSDPLY-01600> <Processing command-line argument -domain_home>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <CommandLineArgUtil> <process_args> <WLSDPLY-01600> <Processing command-line argument -model_file>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <CommandLineArgUtil> <process_args> <WLSDPLY-01600> <Processing command-line argument -variable_file>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <CommandLineArgUtil> <process_args> <WLSDPLY-01600> <Processing command-line argument -archive_file>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <CommandLineArgUtil> <process_args> <WLSDPLY-01600> <Processing command-line argument -domain_resource_file>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY ./domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <CommandLineArgUtil> <process_args> <> <RETURN {'-domain_home': '/u01/domains/sample-domain3', '-archive_file': '/Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip', '-trailing_arguments': [], '-variable_file': '/Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.properties', '-oracle_home': '/Users/rbajaj/Oracle/Middleware/Oracle_Home', '-domain_resource_file': '/Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/WLS/blog-domain.yaml', '-model_file': '/Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml'}>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.properties>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.properties>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.properties>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.properties>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.properties>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.properties>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.properties>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.properties>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/typedefs/WLS.json>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/typedefs/WLS.json>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/typedefs/WLS.json>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/typedefs/WLS.json>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/typedefs/WLS.json>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/typedefs/WLS.json>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/typedefs/WLS.json>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/typedefs/WLS.json>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <JsonToPython> <parse> <> <ENTRY>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <JsonTranslator> <parse> <> <ENTRY>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <JsonTranslator> <parse> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <JsonToPython> <parse> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <DomainTypedef> <__match_version_typedef> <> <ENTRY {'10.3.6': 'WLS_11G', '12.1.3': 'WLS_12CR1', '12.1.2': 'WLS_12CR1', '12.1.1': 'WLS_11G', '14.1': 'WLS_14', '12.2.1.4': 'WLS_12CR2', '12.2.1.3': 'WLS_12CR2', '12.2.1': 'WLS_12CR2'}>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <DomainTypedef> <__match_version_typedef> <WLSDPLY-12310> <Version 12.2.1.3.0 returned from the domain home>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <DomainTypedef> <__match_version_typedef> <WLSDPLY-12308> <Domain type WLS type definition in file /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/typedefs/WLS.json contained version 12.2.1.3 which most closely matches WebLogic version 12.2.1.3.0>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <DomainTypedef> <__match_version_typedef> <> <RETURN WLS_12CR2>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileToPython> <parse> <> <ENTRY>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileToPython> <_parse_yaml> <WLSDPLY-01711> <Parse model YAML file from /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileUtils> <validateExistingFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlToPython> <parse> <> <ENTRY>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <parse> <> <ENTRY>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <parseInternal> <> <ENTRY>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY AdminUserName [44 28 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY AdminPassword [44 28 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY Name [44 28 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY DomainVersion [44 28 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY NativeVersionEnabled [44 28 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY JavaHome [44 28 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY PropertiesVersion [44 28 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY weblogic.StartScriptName [44 28 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY ListenPort [44 28 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY Machine [44 28 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY WldfDiagnosticVolume [44 28 73 69 36 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY NumberOfFilesLimited [44 28 73 69 36 73 69 36 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY NMType [44 28 73 69 36 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY NodeManagerPasswordEncrypted [44 28 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY apiVersion [44 28 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY kind [44 28 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY name [44 28 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY namespace [44 28 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY image [44 28 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY imagePullPolicy [44 28 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY name [44 28 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY value [44 28 73 69 36 73 69 36 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY value [44 28 73 69 36 73 69 36 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY SourcePath [44 28 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY ModuleType [44 28 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY StagingMode [44 28 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <ENTRY Target [44 28 73 69 36 73 69 36 73 69 36 20]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <getScalarValue> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <parseInternal> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlTranslator> <parse> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <YamlToPython> <parse> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <FileToPython> <parse> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployArchive> <<init>> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployArchive> <validateNonEmptyString> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip archiveFileName <init>>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployArchive> <validateNonEmptyString> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployZipFile> <<init>> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployZipFile> <<init>> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployArchive> <<init>> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <Validator> <__validate_model_file> <WLSDPLY-05002> <Performing validation in TOOL mode for WebLogic Server version 12.2.1.3.0 and WLST OFFLINE mode>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <Validator> <__validate_model_file> <WLSDPLY-05003> <Performing model validation on the /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml model file>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <Validator> <__validate_model_file> <WLSDPLY-05005> <Performing archive validation on the /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip archive file>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployArchive> <getArchiveEntries> <> <ENTRY>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployZipFile> <listZipEntries> <> <ENTRY>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployZipFile> <closeOpenZipFile> <> <ENTRY>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployZipFile> <closeOpenZipFile> <> <RETURN>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployZipFile> <zipFileIsNotEmpty> <> <ENTRY>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployZipFile> <zipFileIsNotEmpty> <WLSDPLY-01515> <Zip file /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip is not new>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployZipFile> <zipFileIsNotEmpty> <> <RETURN true>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployZipFile> <listZipEntries> <> <RETURN [wlsdeploy/applications/blog-ear.ear]>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployArchive> <getArchiveEntries> <> <RETURN [wlsdeploy/applications/blog-ear.ear]>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <Validator> <__validate_model_section> <WLSDPLY-05008> <Validating the domainInfo section of the model file>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category DomainInfo from file oracle/weblogic/deploy/aliases/category_modules/DomainInfo.json>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <AliasEntries> <__load_category> <WLSDPLY-08118> <Loaded Aliases for model category DomainInfo>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <Validator> <__validate_model_section> <WLSDPLY-05008> <Validating the topology section of the model file>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category Domain from file oracle/weblogic/deploy/aliases/category_modules/Domain.json>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <AliasEntries> <__load_category> <WLSDPLY-08118> <Loaded Aliases for model category Domain>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category NMProperties from file oracle/weblogic/deploy/aliases/category_modules/NMProperties.json>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <AliasEntries> <__load_category> <WLSDPLY-08118> <Loaded Aliases for model category NMProperties>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployArchive> <isPathIntoArchive> <> <ENTRY /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home>
+####<Oct 18, 2020 9:51:36 PM> <FINER> <WLSDeployArchive> <isPathIntoArchive> <> <RETURN false>
+####<Oct 18, 2020 9:51:36 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category Server from file oracle/weblogic/deploy/aliases/category_modules/Server.json>
+####<Oct 18, 2020 9:51:37 PM> <FINE> <AliasEntries> <__load_category> <WLSDPLY-08118> <Loaded Aliases for model category Server>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category Machine from file oracle/weblogic/deploy/aliases/category_modules/Machine.json>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category> <WLSDPLY-08118> <Loaded Aliases for model category Machine>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category SecurityConfiguration from file oracle/weblogic/deploy/aliases/category_modules/SecurityConfiguration.json>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category> <WLSDPLY-08118> <Loaded Aliases for model category SecurityConfiguration>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <Validator> <__validate_model_section> <WLSDPLY-05008> <Validating the resources section of the model file>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <Validator> <__validate_model_section> <WLSDPLY-05009> <Model file /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.yaml does not contain a resources section, validation of resources was skipped.>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <Validator> <__validate_model_section> <WLSDPLY-05008> <Validating the appDeployments section of the model file>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category AppDeployment from file oracle/weblogic/deploy/aliases/category_modules/AppDeployment.json>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category> <WLSDPLY-08118> <Loaded Aliases for model category Application>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployArchive> <isPathIntoArchive> <> <ENTRY wlsdeploy/applications/blog-ear.ear>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployArchive> <isPathIntoArchive> <> <RETURN true>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployArchive> <containsFileOrPath> <> <ENTRY wlsdeploy/applications/blog-ear.ear>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployArchive> <validateNonEmptyString> <> <ENTRY wlsdeploy/applications/blog-ear.ear path containsFileOrPath>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployArchive> <validateNonEmptyString> <> <RETURN>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployArchive> <isPathIntoArchive> <> <ENTRY wlsdeploy/applications/blog-ear.ear>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployArchive> <isPathIntoArchive> <> <RETURN true>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployZipFile> <listZipEntries> <> <ENTRY>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployZipFile> <closeOpenZipFile> <> <ENTRY>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployZipFile> <closeOpenZipFile> <> <RETURN>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployZipFile> <zipFileIsNotEmpty> <> <ENTRY>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployZipFile> <zipFileIsNotEmpty> <WLSDPLY-01515> <Zip file /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/BlogDomain-WDT.zip is not new>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployZipFile> <zipFileIsNotEmpty> <> <RETURN true>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployZipFile> <listZipEntries> <> <RETURN [wlsdeploy/applications/blog-ear.ear]>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployArchive> <containsFileOrPath> <> <RETURN true>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <Validator> <__validate_model_section> <WLSDPLY-05008> <Validating the kubernetes section of the model file>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category Kubernetes from file oracle/weblogic/deploy/aliases/category_modules/Kubernetes.json>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category> <WLSDPLY-08118> <Loaded Aliases for model category Kubernetes>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category Metadata from file oracle/weblogic/deploy/aliases/category_modules/Metadata.json>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category> <WLSDPLY-08118> <Loaded Aliases for model category metadata>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category Spec from file oracle/weblogic/deploy/aliases/category_modules/Spec.json>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category> <WLSDPLY-08118> <Loaded Aliases for model category spec>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category ServerPod from file oracle/weblogic/deploy/aliases/category_modules/ServerPod.json>
+####<Oct 18, 2020 9:51:38 PM> <FINE> <AliasEntries> <__load_category_file> <WLSDPLY-08119> <Loading aliases for category ServerPod from file oracle/weblogic/deploy/aliases/category_modules/ServerPod.json>
+####<Oct 18, 2020 9:51:38 PM> <INFO> <filter_helper> <apply_filters> <WLSDPLY-20017> <No filter configuration file /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/model_filters.json>
+####<Oct 18, 2020 9:51:38 PM> <INFO> <filter_helper> <apply_filters> <WLSDPLY-20016> <No filters of type extract found in filter configuration file /Users/rbajaj/Documents/weblogic-poc/domaininmodel/weblogic-deploy/lib/model_filters.json>
+####<Oct 18, 2020 9:51:38 PM> <INFO> <DomainResourceExtractor> <extract> <WLSDPLY-10000> <Extracting to domain resource file /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <PythonToFile> <writeToFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <PythonToFile> <_write_to_yaml_file> <WLSDPLY-01712> <Persist model YAML file to /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <PythonToYaml> <writeToYamlFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <FileUtils> <validateWritableFile> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <FileUtils> <validateFileName> <> <ENTRY /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <FileUtils> <validateFileName> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <FileUtils> <validateWritableFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <PythonToYaml> <writeToYamlFile> <> <RETURN /Users/rbajaj/Documents/weblogic-poc/domaininmodel/domain-resources/WLS/blog-domain.yaml>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <PythonToFile> <writeToFile> <> <RETURN>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployExit> <exit> <> <ENTRY 0 oracle.weblogic.deploy.util.WLSDeployExit exit>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployExit> <logCleanup> <> <ENTRY oracle.weblogic.deploy.util.WLSDeployContext@2d7637e6>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployExit> <logCleanup> <> <RETURN>
+####<Oct 18, 2020 9:51:38 PM> <FINER> <WLSDeployExit> <exit> <> <RETURN>

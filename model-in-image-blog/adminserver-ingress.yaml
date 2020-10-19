@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-ingress-sample-domain3-admin-server
+  namespace: sample-domain3-ns
+  labels:
+    weblogic.domainUID: sample-domain3
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host:
+    http:
+      paths:
+      - path: /console
+        backend:
+          serviceName: sample-domain3-adminserver
+          servicePort: 7001

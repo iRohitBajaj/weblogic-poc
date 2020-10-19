@@ -1,0 +1,1 @@
+jdbc:mysql://host.docker.internal:3306/blog-db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC

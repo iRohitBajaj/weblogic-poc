@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-ingress-sample-domain2-cluster-cluster-1
+  namespace: sample-domain2-ns
+  labels:
+    weblogic.domainUID: sample-domain2
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: sample-domain2-cluster-cluster-1.blog.org
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: sample-domain2-cluster-cluster-1
+          servicePort: 8001
