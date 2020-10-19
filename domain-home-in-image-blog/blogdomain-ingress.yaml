@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: traefik-ingress-sample-domain2-cluster-cluster-1
+  name: traefik-ingress-sample-domain2-managed-server
   namespace: sample-domain2-ns
   labels:
     weblogic.domainUID: sample-domain2
@@ -9,10 +9,10 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: sample-domain2-cluster-cluster-1.blog.org
+  - host:
     http:
       paths:
       - path:
         backend:
-          serviceName: sample-domain2-cluster-cluster-1
+          serviceName: sample-domain2-managed-server1
           servicePort: 8001

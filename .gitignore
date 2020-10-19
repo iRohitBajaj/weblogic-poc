@@ -4,4 +4,7 @@ domain-home-in-image-blog/docker-secret*.yaml
 model-in-image-blog/outputs/*
 domain-home-in-image-blog/outputs/*
 domain-home-in-image-blog/archive.zip
+domain-home-in-image-blog/app-archive/*
 logs
+domain-home-in-image-blog/Dockerfile-e
+domain-home-in-image-blog/properties/docker-build/domain_security.properties-e

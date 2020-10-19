@@ -24,7 +24,7 @@ kubectl create secret generic regcred \
     --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
     --type=kubernetes.io/dockerconfigjson -o yaml > docker-secret.yaml  
 
-## Copy docket secret yaml and change namespace accordingly  
+## Copy docker secret yaml and change namespace accordingly  
 cp docker-secret.yaml $WEBLOGIC_POC_HOME/model-in-image-blog/  
 cp docker-secret.yaml $WEBLOGIC_POC_HOME/domain-home-in-image-blog/  
 
@@ -74,48 +74,35 @@ helm upgrade sample-weblogic-operator  $WEBLOGIC_OP_HOME/kubernetes/charts/weblo
     --namespace sample-weblogic-operator-ns \
     --reuse-values \
     --set "domainNamespaces={sample-domain2-ns,sample-domain3-ns}" \
-    --wait
+    --wait  
 
-## Upgrade traefik to look for weblogic domain objects
+## Upgrade traefik to look for weblogic domain objects  
 helm upgrade traefik-operator stable/traefik \
     --namespace traefik \
     --reuse-values \
     --set "kubernetes.namespaces={traefik,sample-domain2-ns,sample-domain3-ns}" \
-    --wait
+    --wait  
 
-## Create weblogic admin server creds for use in domain in image setup
+## Create weblogic admin server creds for use in domain in image setup  
 $WEBLOGIC_OP_HOME/kubernetes/samples/scripts/create-weblogic-domain-credentials/create-weblogic-credentials.sh \
-  -u weblogic -p Admin@123 -n sample-domain2-ns -d sample-domain2 -s sample-domain2-weblogic-credentials
+  -u weblogic -p Admin@123 -n sample-domain2-ns -d sample-domain2 -s sample-domain2-weblogic-credentials  
 
 ## Create weblogic admin server creds for use in model in image setup
 $WEBLOGIC_OP_HOME/kubernetes/samples/scripts/create-weblogic-domain-credentials/create-weblogic-credentials.sh \
-  -u weblogic -p Admin@123 -n sample-domain3-ns -d sample-domain3 -s sample-domain3-weblogic-credentials
+  -u weblogic -p Admin@123 -n sample-domain3-ns -d sample-domain3 -s sample-domain3-weblogic-credentials  
 
 ## Create mysql pod in whichever namespace you want, below steps are for use in model in image
-## make sure appropriate storage class exists and change mysql-pv.yaml accordingly, below set up is for host path
+## make sure appropriate storage class exists and change mysql-pv.yaml accordingly, below set up is for host path  
 cd $WEBLOGIC_POC_HOME  
-kubectl apply -f mysql-pv.yaml
-helm install blog-db -f mysql-values.yml stable/mysql --namespace=sample-domain3-ns
-kubectl apply -f ubuntu-debug.yaml
-kubectl exec -it ubuntu-debug -n sample-domain3-ns -- /bin/bash
-apt update && apt install -y mysql-client
-mysql -h blog-db-mysql -u bloguser -D blogdb --password=blogpassword
+kubectl apply -f mysql-pv.yaml  
+helm install blog-db -f mysql-values.yml stable/mysql --namespace=sample-domain3-ns  
+kubectl apply -f ubuntu-debug.yaml  
+kubectl exec -it ubuntu-debug -n sample-domain3-ns -- /bin/bash  
+apt update && apt install -y mysql-client  
+mysql -h blog-db-mysql -u bloguser -D blogdb --password=blogpassword  
 
-**************************************************************************  
-
-
-./create-domain.sh -i create-domain-inputs.yaml -o ./outputs -u weblogic -p Admin@123 -e
-
-source $ORACLE_HOME/wlserver/server/bin/setWLSEnv.sh > /dev/null 2>&1 && java weblogic.version
-$ORACLE_HOME/OPatch/opatch lspatches
-
-
-http://localhost:30701/console
-curl -v -H 'host: sample-domain1.org' http://localhost:30305/weblogic/ready
-$WEBLOGIC_POC_HOME/operatorrest.sh localhost /operator/latest/domains
-kubectl -it exec pod/sample-domain1-admin-server -c weblogic-server -n sample-domain1-ns -- /bin/bash
-
-t3 for wlst - 30012
+## Execute blogdb-ddl.sql to create required tables in database  
+Copy contents of sql file and execute via ubuntu test pod.  
 
 *********************************************************  
 # Model in image
@@ -284,27 +271,63 @@ kubectl exec -it ubuntu-debug -n sample-domain3-ns -- /bin/bash
 apt update && apt install -y  
 
 ## Few sanity checks
-http://localhost:30701/console   
 ## [Optional] $WEBLOGIC_POC_HOME/operatorrest.sh localhost /operator/latest/domains  
+## Run the WLS Administration Console:  
+
+In your browser, enter `https://localhost:30701/console`. And validate app is deployed and jdbc source is available.  
+
 ## Via ingress  
-curl http://localhost/blog-root/api/user/show/1  
+curl `http://localhost/blog-root/api/user/show/1`  
 OR  
-browse via browser - http://localhost/blog-root  
+browse via browser - `http://localhost/blog-root`  
 
 ***************************************************************
-Domain in Home using wdt
+# Domain in Home using wlst
 ***************************************************************
 
-kubectl -n sample-domain2-ns create secret generic nm-credentials \
-  --from-literal=password=Admin@123
+## Example of Image with WLS Domain  
+================================
+This archive needs to be built (one time only) before building the Docker image.  
 
-kubectl -n sample-domain2-ns create secret generic blogdb-credentials \
-  --from-literal=password=blogpassword
+cd $WEBLOGIC_POC_HOME/domain-home-in-image-blog  
+./build-archive.sh  
+
+export DOMAIN_UID=sample-domain2
+
+## Build image using existing app archive, properties file and base weblogic image  
+./build.sh  
+
+## Push newly build image to private repo  
+docker push dockerish82/domain-home-in-image-blog:12.2.1.4  
+
+## Note:  
+This setup assumes mysql is running locally, if not please follow mysql pod creation step from common instructions.  
+And change dsUrl in $WEBLOGIC_POC_HOME/domain-home-in-image-blog/container-scripts/datasource.properties accordingly.  
+
+## Update and validate create-domain-inputs.yaml and make sure things look good  
+./create-domain.sh -i create-domain-inputs.yaml -o ./outputs -u weblogic -p Admin@123 -e  
+
+## Create ingresses for traefik  
+kubectl apply -f adminserver-ingress.yaml -n sample-domain2-ns  
+kubectl apply -f blogdomain-ingress.yaml -n sample-domain2-ns  
+
+## Run the WLS Administration Console:  
+
+In your browser, enter `https://localhost:30701/console`. And validate app is deployed and jdbc source is available.  
+
+## Via ingress  
+curl `http://localhost/blog-root/api/user/show/1`  
+OR  
+browse via browser - `http://localhost/blog-root`  
 
 
-
+# Troubleshooting tips  
+## check operator logs for severe errors  
 kubectl logs {weblogic-operator-pod} -c weblogic-operator -n sample-weblogic-operator-ns  \
-  | egrep -e "level...(SEVERE|WARNING)"
+  | egrep -e "level...(SEVERE|WARNING)"  
 
-curl -s -S -m 10 -H 'host: sample-domain3.blog.org' \
-   http://localhost:30305/myapp_war/index.jsp
+## Watch for pod creation after domain k8 resource creation  
+kubetl get pods -n sample-domain-ns3 --watch  
+
+## check that persistent volume was claimed by mysql pod after helm install of mysql
+kubectl get pv mysql-pv -o wide  
