@@ -9,5 +9,6 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: "/Users/rbajaj/mysqlpoddata"
+  nfs:
+    path: /mnt/mysql-pool/
+    server: ipgoeshere
