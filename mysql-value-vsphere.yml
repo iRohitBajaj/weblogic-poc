@@ -1,0 +1,13 @@
+image: "mysql"
+imageTag: "5.7.30"
+
+mysqlUser: bloguser
+
+mysqlPassword: blogpassword
+
+mysqlDatabase: blogdb
+imagePullPolicy: IfNotPresent
+persistence:
+  size: 1Gi
+  storageClass: vsan-default-storage-policy
+  accessMode: ReadWriteOnce

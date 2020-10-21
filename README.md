@@ -266,9 +266,6 @@ kubectl apply -f $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/WLS/blo
 kubectl apply -f adminserver-ingress.yaml  
 kubectl apply -f blogdomain-ingress.yaml  
 
-## Create a test pod to validate mysql service connection  
-kubectl exec -it ubuntu-debug -n sample-domain3-ns -- /bin/bash   
-apt update && apt install -y  
 
 ## Few sanity checks
 ## [Optional] $WEBLOGIC_POC_HOME/operatorrest.sh localhost /operator/latest/domains  

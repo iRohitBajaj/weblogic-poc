@@ -1,7 +1,7 @@
 #!/bin/sh
 
 tag_name() {
-   tagName=${CUSTOM_IMAGE_TAG:-"domain-home-in-image-blog:v1"}
+   tagName=${CUSTOM_IMAGE_TAG:-"dockerish82/domain-home-in-image-blog:v1"}
    echo "CUSTOM_IMAGE_TAG  ${tagName} "
 }
 
