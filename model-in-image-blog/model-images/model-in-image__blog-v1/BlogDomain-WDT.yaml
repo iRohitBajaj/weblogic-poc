@@ -1,0 +1,34 @@
+domainInfo:
+    AdminUserName: '@@SECRET:__WEBLOGIC-CREDENTIALS__:username@@'
+    AdminPassword: '@@SECRET:__WEBLOGIC-CREDENTIALS__:password@@'
+topology:
+    Name: '@@ENV:CUSTOM_DOMAIN_NAME@@'
+    DomainVersion: 12.2.1.4.0
+    NMProperties:
+        NativeVersionEnabled: false
+        #JavaHome: /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home
+        PropertiesVersion: 12.2.1.4.0
+        weblogic.StartScriptName: startWebLogic.sh
+    Server:
+        AdminServer:
+        'Managed-Server-0':
+            ListenPort: 8001
+            Machine: 'Machine-0'
+            ServerDiagnosticConfig:
+                WldfDiagnosticVolume: Low
+            WebServer:
+                WebServerLog:
+                    NumberOfFilesLimited: false
+    Machine:
+        'Machine-0':
+            NodeManager:
+                NMType: SSL
+    SecurityConfiguration:
+        NodeManagerPasswordEncrypted: '@@SECRET:nm-credentials:password@@'
+appDeployments:
+    Application:
+        'blog-ear':
+            SourcePath: 'wlsdeploy/applications/blog-ear.ear'
+            ModuleType: ear
+            StagingMode: nostage
+            Target: 'Managed-Server-0'
