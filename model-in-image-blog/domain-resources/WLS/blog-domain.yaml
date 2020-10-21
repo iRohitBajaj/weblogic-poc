@@ -1,0 +1,60 @@
+apiVersion: weblogic.oracle/v8
+kind: Domain
+metadata:
+    name: sample-domain3
+    namespace: sample-domain3-ns
+    labels:
+        weblogic.domainUID: sample-domain3
+spec:
+    domainHomeSourceType: FromModel
+    includeServerOutInPodLog: true
+    serverStartPolicy: "IF_NEEDED"
+    adminServer:
+        # "RUNNING" means the listed server will be started up to "RUNNING" mode
+        # "ADMIN" means the listed server will be start up to "ADMIN" mode
+        serverStartState: "RUNNING"
+        adminService:
+            channels:
+            # The Admin Server's NodePort
+            -   channelName: default
+                nodePort: 30701
+    replicas: 1
+    # Change the restartVersion to force the introspector job to rerun
+    # and apply any new model configuration, to also force a subsequent
+    # roll of your domain's WebLogic Server pods.
+    restartVersion: '1'
+    configuration:
+        # Settings for domainHomeSourceType 'FromModel'
+        model:
+            # Valid model domain types are 'WLS', 'JRF', and 'RestrictedJRF', default is 'WLS'
+            domainType: "WLS"
+            # Optional configmap for additional models and variable files
+            configMap: sample-domain3-wdt-config-map
+            # All 'FromModel' domains require a runtimeEncryptionSecret with a 'password' field
+            runtimeEncryptionSecret: sample-domain3-runtime-encryption-secret
+        # Secrets that are referenced by model yaml macros
+        # (the model yaml in the optional configMap or in the image)
+        secrets:
+        -   nm-credentials
+        -   blogdb-credentials
+        # Increase the introspector job active timeout value for DeadlineExceeded error
+        introspectorJobActiveDeadlineSeconds: 600
+    image: 'dockerish82/model-in-image:blog-v1'
+    imagePullPolicy: IfNotPresent
+    webLogicCredentialsSecret:
+        name: sample-domain3-weblogic-credentials
+    serverPod:
+        env:
+        -   name: USER_MEM_ARGS
+            value: '-XX:+UseContainerSupport -Djava.security.egd=file:/dev/./urandom -Xms256m -Xmx512m'
+        -   name: JAVA_OPTIONS
+            value: '-Dweblogic.StdoutDebugEnabled=false'
+        -   name: CUSTOM_DOMAIN_NAME
+            value: 'sample-domain3'
+        resources:
+            requests:
+                cpu: "250m"
+                memory: "768Mi"
+    domainHome: /u01/domains/sample-domain3
+    imagePullSecrets:
+    -   name: regcred

@@ -58,7 +58,7 @@ set('TestTableName','SQL SELECT 1 FROM DUAL')
 
 # Assign
 # ======
-assign('JDBCSystemResource', dsname, 'Target', admin_name)
+# assign('JDBCSystemResource', dsname, 'Target', admin_name)
 assign('JDBCSystemResource', dsname, 'Target', cluster_name)
 
 # Update Domain, Close It, Exit

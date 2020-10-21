@@ -1,0 +1,51 @@
+domainInfo:
+    AdminUserName: '@@PROP:AdminUserName@@'
+    AdminPassword: '@@PROP:AdminPassword@@'
+topology:
+    Name: '@@ENV:DOMAIN_UID@@'
+    DomainVersion: 12.2.1.4.0
+    NMProperties:
+        NativeVersionEnabled: false
+        JavaHome: /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home
+        PropertiesVersion: 12.2.1.4.0
+        weblogic.StartScriptName: startWebLogic.sh
+    Server:
+        AdminServer:
+        'Managed-Server-0':
+            ListenPort: 8001
+            Machine: 'Machine-0'
+            ServerDiagnosticConfig:
+                WldfDiagnosticVolume: Low
+            WebServer:
+                WebServerLog:
+                    NumberOfFilesLimited: false
+    Machine:
+        'Machine-0':
+            NodeManager:
+                NMType: SSL
+    SecurityConfiguration:
+        NodeManagerPasswordEncrypted: '@@PROP:SecurityConfig.NodeManagerPasswordEncrypted@@'
+kubernetes:
+    apiVersion: weblogic.oracle/v8
+    kind: Domain
+    metadata:
+        name: '@@ENV:DOMAIN_UID@@'
+        namespace: '@@ENV:DOMAIN_UID@@-ns'
+    spec:
+        image: 'model-in-image:blog-v1'
+        imagePullPolicy: 'IfNotPresent'
+        webLogicCredentialsSecret:
+            name: '@@ENV:DOMAIN_UID@@-weblogic-credentials'
+        serverPod:
+            env:
+                USER_MEM_ARGS:
+                    value: '-XX:+UseContainerSupport -Djava.security.egd=file:/dev/./urandom -Xms256m -Xmx512m'
+                JAVA_OPTIONS:
+                    value: "-Dweblogic.StdoutDebugEnabled=false"
+appDeployments:
+    Application:
+        'blog-ear':
+            SourcePath: 'wlsdeploy/applications/blog-ear.ear'
+            ModuleType: ear
+            StagingMode: nostage
+            Target: 'Managed-Server-0'
