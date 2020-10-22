@@ -1,98 +1,126 @@
+We will be using already existing blog appication EAR which exposes web UI to create blog posts and add comments.  
 *********************************************************  
 # Common steps for both "domain in image" and "model in image"  
 *********************************************************  
+Clone weblogic-kubernetes-operator git repo.  
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home  
+Install Java if not already there -   
+wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" https://javadl.oracle.com/webapps/download/GetFile/1.8.0_271-b09/61ae65e088624f5aaa0b1d2d801acb16/linux-i586/jdk-8u271-linux-x64.tar.gz  
+
+tar xvfz {downloaded jdk}  
+
+export JAVA_HOME={Unzipped jdk path}  
+### Replace paths accordingly
 export WEBLOGIC_POC_HOME=/Users/rbajaj/Documents/weblogic-poc  
-## Clone weblogic operator repo from github and set it as env var  
+### Clone weblogic operator repo from github and set it as env var  
 export WEBLOGIC_OP_HOME=/Users/rbajaj/Documents/weblogic-kubernetes-operator  
 cd $WEBLOGIC_POC_HOME  
 
-## Extract existing running domain
+### Extract existing running domain  
+```
 ./weblogic-deploy/bin/discoverDomain.sh -oracle_home /Users/rbajaj/weblogic/wls12214 \
 -domain_home /Users/rbajaj/weblogic/wls12214/user_projects/domains/sample-domain1 \
 -archive_file $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.zip \
 -model_file $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.yaml \
 -variable_file $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.properties  
+```
 
-## Copy files for use in model in image setup  
+### Copy files for use in model in image setup  
 cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.zip $WEBLOGIC_POC_HOME/model-in-image-blog/model-images/model-in-image__blog-v1/  
 cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.yaml $WEBLOGIC_POC_HOME/model-in-image-blog/model-images/model-in-image__blog-v1/  
 cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.properties $WEBLOGIC_POC_HOME/model-in-image-blog/model-images/model-in-image__blog-v1/  
 
+### For use in domain in image  
+kubectl create namespace sample-domain2-ns  
+### For use in model in image  
+kubectl create namespace sample-domain3-ns  
+
+### Create a docker secret to be used by worker nodes to pull images from docker hub  
+```
 kubectl create secret generic regcred \
     --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
     --type=kubernetes.io/dockerconfigjson -o yaml > docker-secret.yaml  
+```
 
-## Copy docker secret yaml and change namespace accordingly  
+### Copy docker secret yaml and change namespace accordingly  
 cp docker-secret.yaml $WEBLOGIC_POC_HOME/model-in-image-blog/  
 cp docker-secret.yaml $WEBLOGIC_POC_HOME/domain-home-in-image-blog/  
 
-## create namespaces for operator and ingress controller  
+### create namespaces for operator and ingress controller  
 kubectl create namespace traefik  
 kubectl create namespace sample-weblogic-operator-ns  
 
-## For use in domain in image  
-kubectl create namespace sample-domain2-ns  
+### For use in domain in image  
 kubectl apply -f docker-secret.yaml -n sample-domain2-ns  
-## For use in model in image  
-kubectl create namespace sample-domain3-ns  
+### For use in model in image  
 kubectl apply -f docker-secret.yaml -n sample-domain3-ns  
 
-## Download weblogic image from oracle container registry, tag it and push it to private repo  
+### Download weblogic image from oracle container registry, tag it and push it to private repo, requires you to accept terms & conditions    
 docker tag 4a5e6a90ca98 dockerish82/weblogicrepo:12.2.1.4  
 docker push dockerish82/weblogicrepo:12.2.1.4  
 
-## Grant cluster admin role to helm  
+### Grant cluster admin role to helm  
 kubectl apply -f helm-cluster-admin.yaml  
 
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/  
 
+### Use helm to install traefik ingress controller  
+```
 helm install traefik-operator stable/traefik \
     --namespace traefik \
     --values traefic-values.yaml \
     --set "kubernetes.namespaces={traefik}" \
     --wait  
+```
 
-## Create service account to be used by operator  
+### Create service account to be used by operator  
 kubectl create serviceaccount -n sample-weblogic-operator-ns sample-weblogic-operator-sa  
 
-## Install weblogic operator using helm  
+### Install weblogic operator using helm  
+```
 helm install sample-weblogic-operator $WEBLOGIC_OP_HOME/kubernetes/charts/weblogic-operator \
   --namespace sample-weblogic-operator-ns \
   --set image=oracle/weblogic-kubernetes-operator:3.0.2 \
   --set serviceAccount=sample-weblogic-operator-sa \
   --set "domainNamespaces={}" \
   --wait  
+```
 
-## [Optional] secret creation for exposing operator rest endpoint, clone weblogic kubernetes operator github repo  
+#### [Optional] secret creation for exposing operator rest endpoint, clone weblogic kubernetes operator github repo  
 $WEBLOGIC_OP_HOME/kubernetes/samples/scripts/rest/generate-external-rest-identity.sh -a "DNS:kuberntes.docker.internal,DNS:localhost,IP:127.0.0.1" -n sample-weblogic-operator-ns -s weblogic-operator-external-rest-identity  
 
-## Enable elk, add operator certs and add namespaces to monitor for detecting weblogic domain objects  
+#### [Optional] Enable elk, add operator certs and add namespaces to monitor for detecting weblogic domain objects  
+```
 helm upgrade sample-weblogic-operator  $WEBLOGIC_OP_HOME/kubernetes/charts/weblogic-operator \
     --values $WEBLOGIC_POC_HOME/op-values.yaml \
     --namespace sample-weblogic-operator-ns \
     --reuse-values \
     --set "domainNamespaces={sample-domain2-ns,sample-domain3-ns}" \
     --wait  
+```
 
-## Upgrade traefik to look for weblogic domain objects  
+### Upgrade traefik to look for weblogic domain objects  
+```
 helm upgrade traefik-operator stable/traefik \
     --namespace traefik \
     --reuse-values \
     --set "kubernetes.namespaces={traefik,sample-domain2-ns,sample-domain3-ns}" \
     --wait  
+```
 
-## Create weblogic admin server creds for use in domain in image setup  
+### Create weblogic admin server creds for use in domain in image setup  
+```
 $WEBLOGIC_OP_HOME/kubernetes/samples/scripts/create-weblogic-domain-credentials/create-weblogic-credentials.sh \
   -u weblogic -p Admin@123 -n sample-domain2-ns -d sample-domain2 -s sample-domain2-weblogic-credentials  
+```
 
-## Create weblogic admin server creds for use in model in image setup
+### Create weblogic admin server creds for use in model in image setup  
+```
 $WEBLOGIC_OP_HOME/kubernetes/samples/scripts/create-weblogic-domain-credentials/create-weblogic-credentials.sh \
   -u weblogic -p Admin@123 -n sample-domain3-ns -d sample-domain3 -s sample-domain3-weblogic-credentials  
+```
 
-## Create mysql pod in whichever namespace you want, below steps are for use in model in image
-## make sure appropriate storage class exists and change mysql-pv.yaml accordingly, below set up is for host path  
+### Create mysql pod in whichever namespace you want, below steps are for use in model in image,  make sure appropriate storage class exists and change mysql-pv.yaml accordingly, below set up is for host path  
 cd $WEBLOGIC_POC_HOME  
 kubectl apply -f mysql-pv.yaml  
 helm install blog-db -f mysql-values.yml stable/mysql --namespace=sample-domain3-ns  
@@ -101,56 +129,67 @@ kubectl exec -it ubuntu-debug -n sample-domain3-ns -- /bin/bash
 apt update && apt install -y mysql-client  
 mysql -h blog-db-mysql -u bloguser -D blogdb --password=blogpassword  
 
-## Execute blogdb-ddl.sql to create required tables in database  
+### Execute blogdb-ddl.sql to create required tables in database  
 Copy contents of sql file and execute via ubuntu test pod.  
 
 *********************************************************  
-# Model in image
+# Model in image  
 *********************************************************  
 
-cd $WEBLOGIC_POC_HOME/model-in-image-blog 
+cd $WEBLOGIC_POC_HOME/model-in-image-blog  
 
-## [Optional] Handy command to delete old wdt_latest
-./imagetool/bin/imagetool.sh cache deleteEntry --key wdt_latest
+#### [Optional] Handy command to delete old wdt_latest  
+./imagetool/bin/imagetool.sh cache deleteEntry --key wdt_latest  
 
-## Add weblogic-deploy.zip to imagetool cache to layer it above weblogic base image
+### Add weblogic-deploy.zip to imagetool cache to layer it above weblogic base image  
+```
 ./imagetool/bin/imagetool.sh cache addInstaller \
   --type wdt \
   --version latest \
-  --path $WEBLOGIC_POC_HOME/model-in-image-blog/model-images/weblogic-deploy.zip
+  --path $WEBLOGIC_POC_HOME/model-in-image-blog/model-images/weblogic-deploy.zip  
+```
 
-## Confirm cache has necessary entries
-./imagetool/bin/imagetool.sh cache listItems
+### Confirm cache has necessary entries  
+./imagetool/bin/imagetool.sh cache listItems  
 
-## create admin server creds if it does not exist already
+#### create admin server creds if it does not exist already  
+```
 kubectl -n sample-domain3-ns create secret generic \
   sample-domain3-weblogic-credentials \
-   --from-literal=username=weblogic --from-literal=password=Admin@123
+   --from-literal=username=weblogic --from-literal=password=Admin@123  
+
 
 kubectl -n sample-domain3-ns label secret \
   sample-domain3-weblogic-credentials \
   weblogic.domainUID=sample-domain3
+```
 
-## create runtime secret
+### create runtime secret  
+```
 kubectl -n sample-domain3-ns create secret generic \
   sample-domain3-runtime-encryption-secret \
-   --from-literal=password=Runtime@123
+   --from-literal=password=Runtime@123  
 
 kubectl -n sample-domain3-ns label  secret \
   sample-domain3-runtime-encryption-secret \
-  weblogic.domainUID=sample-domain3
+  weblogic.domainUID=sample-domain3  
+```
 
-## create node manager secret
+### create node manager secret  
+```
 kubectl -n sample-domain3-ns create secret generic nm-credentials \
-  --from-literal=password=Admin@123
+  --from-literal=password=Admin@123   
 kubectl -n sample-domain3-ns label  secret \
-  nm-credentials weblogic.domainUID=sample-domain3
+  nm-credentials weblogic.domainUID=sample-domain3   
+```
 
-## create secret to hold blog database password
+### create secret to hold blog database password  
+```
 kubectl -n sample-domain3-ns create secret generic blogdb-credentials \
-  --from-literal=password=blogpassword
+  --from-literal=password=blogpassword  
 kubectl -n sample-domain3-ns label  secret \
-  blogdb-credentials weblogic.domainUID=sample-domain3
+  blogdb-credentials weblogic.domainUID=sample-domain3  
+```
 
 ## Create a new docker image with base + weblogic deploy zip and wdt model and app archive and change yaml file to pull passwords from secrets  
 cd $WEBLOGIC_POC_HOME/model-in-image-blog
