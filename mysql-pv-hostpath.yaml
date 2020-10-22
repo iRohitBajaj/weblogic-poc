@@ -1,10 +1,9 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mysql-pv
-  namespace: sample-domain3-ns
+  name: mysql-pv-hostpath
 spec:
-  storageClassName: vsphere-storage
+  storageClassName: manual
   capacity:
     storage: 1Gi
   accessModes:

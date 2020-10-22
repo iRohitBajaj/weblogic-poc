@@ -68,7 +68,7 @@ image: dockerish82/domain-home-in-image-blog:12.2.1.4
 
 # Image pull policy
 # Legal values are "IfNotPresent", "Always", or "Never"
-imagePullPolicy: Always
+imagePullPolicy: IfNotPresent
 
 # Name of the Kubernetes secret to access the Docker Store to pull the WebLogic Server Docker image
 # The presence of the secret will be validated when this parameter is enabled.
@@ -108,7 +108,7 @@ httpAccessLogInLogHome: true
 #dataHome:
 
 # Port for the T3Channel of the NetworkAccessPoint
-t3ChannelPort: 30012
+t3ChannelPort: 30022
 
 # Public address for T3Channel of the NetworkAccessPoint.  This value should be set to the
 # kubernetes server address, which you can get by running "kubectl cluster-info".  If this
@@ -120,7 +120,7 @@ t3ChannelPort: 30012
 exposeAdminT3Channel: true
 
 # NodePort to expose for the admin server
-adminNodePort: 30701
+adminNodePort: 30711
 
 # Boolean to indicate if the adminNodePort will be exposed
 exposeAdminNodePort: true

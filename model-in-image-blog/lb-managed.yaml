@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: lb-managed
+  namespace: sample-domain3-ns
+spec:
+  type: LoadBalancer
+  selector:
+    weblogic.createdByOperator: "true"
+    weblogic.domainUID: sample-domain3
+    weblogic.serverName: managed-server1
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8001

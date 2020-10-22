@@ -8,3 +8,5 @@ domain-home-in-image-blog/app-archive/*
 logs
 domain-home-in-image-blog/Dockerfile-e
 domain-home-in-image-blog/properties/docker-build/domain_security.properties-e
+model-in-image-blog/domain-resources/BlogDomain-WDT.zip
+model-in-image-blog/model-images/model-in-image__blog-v1/BlogDomain-WDT.zip

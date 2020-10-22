@@ -309,8 +309,8 @@ kubernetes:
 kubectl apply -f $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/WLS/blog-domain.yaml  
 
 ### Create ingresses for admin and managed server  
-kubectl apply -f adminserver-ingress.yaml  
-kubectl apply -f blogdomain-ingress.yaml  
+kubectl apply -f adminserver-ingress-traefik.yaml  
+kubectl apply -f blogdomain-ingress-traefik.yaml  
 
 
 ### Few sanity checks  
@@ -351,8 +351,8 @@ And change dsUrl in $WEBLOGIC_POC_HOME/domain-home-in-image-blog/container-scrip
 ./create-domain.sh -i create-domain-inputs.yaml -o ./outputs -u weblogic -p Admin@123 -e  
 
 ### Create ingresses for traefik  
-kubectl apply -f adminserver-ingress.yaml -n sample-domain2-ns  
-kubectl apply -f blogdomain-ingress.yaml -n sample-domain2-ns  
+kubectl apply -f adminserver-ingress-traefik.yaml -n sample-domain2-ns  
+kubectl apply -f blogdomain-ingress-traefik.yaml -n sample-domain2-ns  
 
 ### Few sanity checks
 ### Run the WLS Administration Console:  
