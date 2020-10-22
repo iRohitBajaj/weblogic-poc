@@ -191,8 +191,9 @@ kubectl -n sample-domain3-ns label  secret \
   blogdb-credentials weblogic.domainUID=sample-domain3  
 ```
 
-## Create a new docker image with base + weblogic deploy zip and wdt model and app archive and change yaml file to pull passwords from secrets  
-cd $WEBLOGIC_POC_HOME/model-in-image-blog
+### Create a new docker image with base + weblogic deploy zip and wdt model and app archive and change yaml file to pull passwords from secrets  
+cd $WEBLOGIC_POC_HOME/model-in-image-blog  
+```
 ./imagetool/bin/imagetool.sh update \
   --tag model-in-image:blog-v1 \
   --fromImage dockerish82/weblogicrepo:12.2.1.4 \
@@ -201,27 +202,30 @@ cd $WEBLOGIC_POC_HOME/model-in-image-blog
   --wdtArchive    ./model-images/model-in-image__blog-v1/BlogDomain-WDT.zip \
   --wdtModelOnly \
   --wdtDomainType WLS \
-  --chown oracle:root
+  --chown oracle:root  
+```
 
-## Tag newly build image and push it to private repo
-docker tag {built-image-id} dockerish82/model-in-image:blog-v1
-docker push dockerish82/model-in-image:blog-v1
+### Tag newly build image and push it to private repo  
+docker tag {built-image-id} dockerish82/model-in-image:blog-v1  
+docker push dockerish82/model-in-image:blog-v1  
 
-## Create a config map to hold data source configuration that will be utilized at time of domain creation
+### Create a config map to hold data source configuration that will be utilized at time of domain creation  
+```
 kubectl -n sample-domain3-ns create configmap sample-domain3-wdt-config-map \
-  --from-file=$WEBLOGIC_POC_HOME/model-in-image-blog/model-configmaps/datasource/blog-datasource.yaml
+  --from-file=$WEBLOGIC_POC_HOME/model-in-image-blog/model-configmaps/datasource/blog-datasource.yaml  
 
 kubectl -n sample-domain3-ns label configmap sample-domain3-wdt-config-map \
-  weblogic.domainUID=sample-domain3
+  weblogic.domainUID=sample-domain3  
+```
 
-export DOMAIN_UID=sample-domain3
+export DOMAIN_UID=sample-domain3  
 
-## Copy wdt model files that were pushed to docker image and modify them to extract domain resource yaml from it  
-cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.zip $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/
-cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.yaml $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/
-cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.properties $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/
+### Copy wdt model files that were pushed to docker image and modify them to remove/extract domain resource yaml from it to create another yaml for config map creation  
+cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.zip $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/  
+cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.yaml $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/  
+cp $WEBLOGIC_POC_HOME/extracted-domain/BlogDomain-WDT.properties $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/  
 
-## Edit BlogDomain-WDT.yaml and add below section, and take out jdbc section as that will be merged via config map  
+### Edit BlogDomain-WDT.yaml and add below section, and take out jdbc section as that will be merged via config map  
 ```
 kubernetes:
     apiVersion: weblogic.oracle/v8
@@ -244,16 +248,19 @@ kubernetes:
                     value: 'sample-domain3'
 ```
 
-## Use extract utility to create a skeleton domain resource yaml  
+### Use extract utility to create a skeleton domain resource yaml  
+```
 ./weblogic-deploy/bin/extractDomainResource.sh -oracle_home /Users/rbajaj/Oracle/Middleware/Oracle_Home \
   -domain_home /u01/domains/sample-domain3 \
   -model_file $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/BlogDomain-WDT.yaml \
   -variable_file $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/BlogDomain-WDT.properties \
   -archive_file $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/BlogDomain-WDT.zip \
   -domain_resource_file ./domain-resources/WLS/blog-domain.yaml  
+```
 
-## And this under spec and pod section respectively
-```   domainHomeSourceType: FromModel
+### And this under spec and pod section respectively to blog-domain.yml  
+``` 
+    domainHomeSourceType: FromModel
     includeServerOutInPodLog: true
     serverStartPolicy: "IF_NEEDED"
     # NodePort to expose for the admin server
@@ -298,72 +305,73 @@ kubernetes:
                 memory: "768Mi"
 ```
 
-## Create weblogic domain  
+### Create weblogic domain  
 kubectl apply -f $WEBLOGIC_POC_HOME/model-in-image-blog/domain-resources/WLS/blog-domain.yaml  
 
-## Create ingresses for admin and managed server  
+### Create ingresses for admin and managed server  
 kubectl apply -f adminserver-ingress.yaml  
 kubectl apply -f blogdomain-ingress.yaml  
 
 
-## Few sanity checks
-## [Optional] $WEBLOGIC_POC_HOME/operatorrest.sh localhost /operator/latest/domains  
-## Run the WLS Administration Console:  
+### Few sanity checks  
+#### [Optional] $WEBLOGIC_POC_HOME/operatorrest.sh localhost /operator/latest/domains  
+#### Run WLS Administration Console:  
 
 In your browser, enter `https://localhost:30701/console`. And validate app is deployed and jdbc source is available.  
 
-## Via ingress  
+### Via ingress  
 curl `http://localhost/blog-root/api/user/show/1`  
 OR  
 browse via browser - `http://localhost/blog-root`  
 
-***************************************************************
-# Domain in Home using wlst
-***************************************************************
+***************************************************************  
+# Domain in Home using wlst  
+***************************************************************  
 
-## Example of Image with WLS Domain  
-================================
+### Example of Image with WLS Domain  
+================================  
 This archive needs to be built (one time only) before building the Docker image.  
 
 cd $WEBLOGIC_POC_HOME/domain-home-in-image-blog  
 ./build-archive.sh  
 
-export DOMAIN_UID=sample-domain2
+export DOMAIN_UID=sample-domain2  
 
-## Build image using existing app archive, properties file and base weblogic image  
+### Build image using existing app archive, properties file and base weblogic image  
 ./build.sh  
 
-## Push newly build image to private repo  
+### Push newly build image to private repo  
 docker push dockerish82/domain-home-in-image-blog:12.2.1.4  
 
 ## Note:  
 This setup assumes mysql is running locally, if not please follow mysql pod creation step from common instructions.  
 And change dsUrl in $WEBLOGIC_POC_HOME/domain-home-in-image-blog/container-scripts/datasource.properties accordingly.  
 
-## Update and validate create-domain-inputs.yaml and make sure things look good  
+### Update and validate create-domain-inputs.yaml and make sure things look good  
 ./create-domain.sh -i create-domain-inputs.yaml -o ./outputs -u weblogic -p Admin@123 -e  
 
-## Create ingresses for traefik  
+### Create ingresses for traefik  
 kubectl apply -f adminserver-ingress.yaml -n sample-domain2-ns  
 kubectl apply -f blogdomain-ingress.yaml -n sample-domain2-ns  
 
-## Run the WLS Administration Console:  
+### Few sanity checks
+### Run the WLS Administration Console:  
 
 In your browser, enter `https://localhost:30701/console`. And validate app is deployed and jdbc source is available.  
 
-## Via ingress  
+### Via ingress  
 curl `http://localhost/blog-root/api/user/show/1`  
 OR  
 browse via browser - `http://localhost/blog-root`  
 
 
 # Troubleshooting tips  
-## check operator logs for severe errors  
+### check operator logs for severe errors  
 kubectl logs {weblogic-operator-pod} -c weblogic-operator -n sample-weblogic-operator-ns  \
   | egrep -e "level...(SEVERE|WARNING)"  
 
-## Watch for pod creation after domain k8 resource creation  
+### Watch for pod creation after domain k8 resource creation  
 kubetl get pods -n sample-domain-ns3 --watch  
 
-## check that persistent volume was claimed by mysql pod after helm install of mysql
+### check that persistent volume was claimed by mysql pod after helm install of mysql
 kubectl get pv mysql-pv -o wide  
